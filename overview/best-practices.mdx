@@ -1,0 +1,205 @@
+---
+title: Best practices
+description: "Follow conventions for scalable and maintainable Mix code."
+icon: "lightbulb"
+---
+
+As you start to build your app with Mix, follow these best practices to ensure your code aligns with the framework's conventions.
+
+<Info>
+  Guidelines in this guide are crafted for scalability and maintainability in Mix, and will evolve with community insights.
+</Info>
+
+To get started, we'll create a button based on Shadcn's [Button](https://ui.shadcn.com/docs/components/button) component. We'll call it `CustomButton`.
+
+## File structure
+
+A well-organized file structure is crucial for maintaining a clean and scalable codebase, especially when working with design systems in Flutter. By dividing the button component into separate files, we enhance readability and promote modularity:
+
+```
+widgets/
+  button/
+    button.dart
+    button.variant.dart
+    button.style.dart
+```
+
+- `button.dart` — Contains the CustomButton class and defines the component's structure.
+- `button.variant.dart` — Defines the CustomButtonVariant class and all its Variant instances.
+- `button.style.dart` — Creates the CustomButtonStyle class, housing all Style instances related to the button.
+
+## Widget structure
+
+It's recommended to use Mix's styled widgets for component creation. These widgets are key in structuring and styling your component:
+
+```dart
+class CustomButton extends StatelessWidget {
+  const CustomButton({
+    super.key,
+    required this.title,
+    required this.onPress,
+  });
+
+  final String title;
+  final void Function() onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return Pressable(
+      onPress: onPress,
+      child: Box(
+        child: StyledText(title),
+      ),
+    );
+  }
+}
+```
+
+This example utilizes Mix's styled widgets: `Pressable`, `Box`, and `StyledText`. Explore the full list of styled widgets [here](/widgets/overview).
+
+## Defining variants
+
+Variants are a powerful feature in design systems, allowing for flexible and reusable component configurations:
+
+```dart
+class CustomButtonType extends Variant {
+  const CustomButtonType._(super.name);
+
+  static const primary = CustomButtonType._('custom.button.primary');
+  static const destructive = CustomButtonType._('custom.button.destructive');
+  static const link = CustomButtonType._('custom.button.link');
+}
+
+class CustomButtonSize extends Variant {
+  const CustomButtonSize._(super.name);
+
+  static const medium = CustomButtonSize._('custom.button.medium');
+  static const large = CustomButtonSize._('custom.button.large');
+}
+```
+
+By defining variants, we create a set of predefined styles that can be easily applied to the `CustomButton`. This approach offers:
+
+- **Consistency**: Variants allow you to maintain a simple API to style your component, ensuring consistency across your application.
+- **Flexibility**: They allow for customization without altering the core component logic.
+- **Ease of use**: The component's API becomes more intuitive, as developers can pick from predefined options.
+
+Now incorporate these variants into the `CustomButton` class:
+
+```dart
+class CustomButton extends StatelessWidget {
+  const CustomButton({
+    super.key,
+    required this.title,
+    required this.onPress,
+    this.type = CustomButtonType.primary,
+    this.size = CustomButtonSize.large,
+  });
+
+  final String title;
+  final void Function() onPress;
+  final CustomButtonType type;
+  final CustomButtonSize size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Pressable(
+      onPress: onPress,
+      child: Box(
+        child: StyledText(title),
+      ),
+    );
+  }
+}
+```
+
+## Styling the component
+
+In the `CustomButtonStyle` class, define the styles for each variant:
+
+```dart
+class CustomButtonStyle {
+  CustomButtonStyle(this.type, this.size);
+
+  final CustomButtonType type;
+  final CustomButtonSize size;
+
+  BoxStyler container() {
+    var style = BoxStyler().borderRounded(8);
+
+    // Apply size
+    style = switch (size) {
+      CustomButtonSize.medium => style.paddingX(16).paddingY(8),
+      CustomButtonSize.large => style.paddingX(24).paddingY(16),
+    };
+
+    // Apply type
+    style = switch (type) {
+      CustomButtonType.primary => style.color(Colors.black),
+      CustomButtonType.destructive => style.color(Colors.redAccent),
+      CustomButtonType.link => style.color(Colors.transparent),
+    };
+
+    return style;
+  }
+
+  TextStyler label() {
+    var style = TextStyler()
+        .color(Colors.white)
+        .fontWeight(FontWeight.bold);
+
+    // Apply size
+    style = switch (size) {
+      CustomButtonSize.medium => style.fontSize(14),
+      CustomButtonSize.large => style.fontSize(18),
+    };
+
+    // Apply type
+    style = switch (type) {
+      CustomButtonType.primary => style.color(Colors.white),
+      CustomButtonType.destructive => style.color(Colors.white),
+      CustomButtonType.link => style
+          .color(Colors.black)
+          .decoration(TextDecoration.underline),
+    };
+
+    return style;
+  }
+}
+```
+
+With these styles in place, update the `CustomButton` class to apply them:
+
+```dart
+class CustomButton extends StatelessWidget {
+  const CustomButton({
+    super.key,
+    required this.title,
+    required this.onPress,
+    this.type = CustomButtonType.primary,
+    this.size = CustomButtonSize.large,
+  });
+
+  final String title;
+  final void Function() onPress;
+  final CustomButtonType type;
+  final CustomButtonSize size;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = CustomButtonStyle(type, size);
+    return Pressable(
+      onPress: onPress,
+      child: Box(
+        style: style.container(),
+        child: StyledText(
+          title,
+          style: style.label(),
+        ),
+      ),
+    );
+  }
+}
+```
+
+You are now ready to use your `CustomButton` component, fully aligned with the Mix framework's conventions.

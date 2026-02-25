@@ -1,0 +1,82 @@
+---
+title: StackBox
+description: "A combined Stack and Container widget with box styling and stack layout capabilities."
+icon: "layer-group"
+---
+
+`StackBox` is equivalent to Flutter's `Stack` and `Container` widgets combined, but provides powerful styling capabilities through the Mix framework.
+
+`StackBox` enables you to create stacked layouts with visual styles such as decoration, padding, margin, constraints, and box/stack behaviors—all customizable and responsive.
+
+Use `StackBoxStyler` to fluently compose your layout and decoration styles:
+
+```dart
+final style = StackBoxStyler()
+ .padding(EdgeInsets.all(16))
+ .decoration(
+   BoxDecoration(
+     color: Colors.white,
+     borderRadius: BorderRadius.circular(12),
+   ),
+ )
+ .alignment(Alignment.center);
+
+StackBox(
+ children: [
+   Icon(Icons.star, size: 48),
+   Positioned(
+     right: 0,
+     bottom: 0,
+     child: Text('Badge'),
+   ),
+ ],
+ style: style,
+)
+```
+
+## Constructor
+
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `StackBoxStyler?` | Optional, defaults to `const StackBoxStyler.create()` |
+| `styleSpec` | `StyleSpec<StackBoxSpec>?` | Optional |
+| `children` | `List<Widget>` | Optional, defaults to `const <Widget>[]` |
+
+## Style API reference
+
+### StackBox methods
+
+| Method | Description |
+|--------|-------------|
+| `animate` | Sets animation |
+| `alignment` | Sets the alignment for the box |
+| `transformAlignment` | Sets the transform alignment |
+| `clipBehavior` | Sets the clip behavior |
+| `modifier` | Sets the widget modifier |
+| `stackAlignment` | Sets the alignment for the Stack widget |
+| `fit` | Sets how the Stack sizes itself based on its children |
+| `textDirection` | Sets the text direction for the Stack |
+| `stackClipBehavior` | Sets the clip behavior for the Stack |
+| `stack` | Applies a custom StackStyler to the StackBox |
+| `foregroundDecoration` | Sets foreground decoration |
+| `padding` | Sets padding |
+| `margin` | Sets margin |
+| `transform` | Sets the transform |
+| `decoration` | Sets decoration |
+| `constraints` | Sets constraints |
+| `wrap` | Sets modifier |
+| `variants` | Sets the variants list |
+
+### Decoration, border, border radius, constraint, spacing, transform, and variant methods
+
+StackBox inherits the same decoration, border, border radius, constraint, spacing, transform, and variant methods as [Box](/widgets/box). Refer to the Box documentation for the complete list.
+
+### Widget state variant
+
+| Method | Description |
+|--------|-------------|
+| `onHovered` | Creates a variant for hover state |
+| `onPressed` | Creates a variant for pressed state |
+| `onFocused` | Creates a variant for focused state |
+| `onDisabled` | Creates a variant for disabled state |
+| `onEnabled` | Creates a variant for enabled state |

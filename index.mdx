@@ -1,97 +1,77 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: Mix
+description: "A styling system for Flutter that separates style definitions from widget structure."
 ---
 
-## Setting up
+<Hero>
+  <HeroTitle>Mix</HeroTitle>
+  <HeroDescription>
+    A composable, type-safe styling system for Flutter that separates style definitions from widget structure.
+  </HeroDescription>
+  <HeroActions>
+    <HeroAction href="/overview/getting-started" label="Get started" />
+    <HeroAction href="https://github.com/btwld/mix" label="GitHub" variant="outline" />
+  </HeroActions>
+</Hero>
 
-Get your documentation site up and running in minutes.
+## Why Mix?
 
-<Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
->
-  Follow our three step quickstart guide.
-</Card>
+Mix provides utility functions for intuitive, composable styling that stays consistent across widgets and files—without being tied to Material Design.
 
-## Make it yours
-
-Design a docs site that looks great and empowers your users.
-
-<Columns cols={2}>
-  <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
-  >
-    Edit your docs locally and preview them in real time.
+<CardGroup cols={3}>
+  <Card title="Composable" icon="puzzle-piece">
+    Build complex styles from simple, reusable pieces using chainable Styler methods.
   </Card>
-  <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
-  >
-    Customize the design and colors of your site to match your brand.
+  <Card title="Type-safe" icon="shield-check">
+    Full Dart type system support with compile-time safety and IDE autocomplete.
   </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+  <Card title="Extensible" icon="plug">
+    Override and extend utilities to fit your needs with custom tokens, directives, and modifiers.
   </Card>
-  <Card
-    title="API documentation"
-    icon="terminal"
-    href="/api-reference/introduction"
-  >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
+</CardGroup>
 
-## Create beautiful pages
+## Quick example
 
-Everything you need to create world-class documentation.
+```dart
+import 'package:flutter/material.dart';
+import 'package:mix/mix.dart';
 
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
-  </Card>
-  <Card
-    title="Code samples"
-    icon="code"
-    href="/essentials/code"
-  >
-    Add sample code to demonstrate how to use your product.
-  </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
+final cardStyle = BoxStyler()
+    .height(100)
+    .width(240)
+    .color(Colors.blue)
+    .borderRounded(12)
+    .paddingAll(16)
+    .onHovered(BoxStyler().color(Colors.blue.shade700));
 
-## Need inspiration?
+Box(
+  style: cardStyle,
+  child: StyledText(
+    'Hello Mix',
+    style: TextStyler().color(Colors.white).fontSize(18),
+  ),
+)
+```
 
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+## Explore the docs
+
+<CardGroup cols={2}>
+  <Card title="Introduction" icon="hand-wave" href="/overview/introduction">
+    Learn what Mix is and how it transforms Flutter styling.
+  </Card>
+  <Card title="Getting started" icon="rocket" href="/overview/getting-started">
+    Install Mix and create your first styled widget.
+  </Card>
+  <Card title="Styling guide" icon="paintbrush" href="/guides/styling">
+    Understand Style, Styler, and composition patterns.
+  </Card>
+  <Card title="Dynamic styling" icon="wand-magic-sparkles" href="/guides/dynamic-styling">
+    Add hover, press, dark mode, and responsive variants.
+  </Card>
+  <Card title="Design tokens" icon="palette" href="/guides/design-tokens">
+    Centralize colors, spacing, and typography with tokens.
+  </Card>
+  <Card title="Widget reference" icon="cubes" href="/widgets/overview">
+    Browse the complete StyleWidgets API reference.
+  </Card>
+</CardGroup>

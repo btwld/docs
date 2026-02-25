@@ -1,0 +1,110 @@
+---
+title: Getting started
+description: "Install Mix and create your first styled Flutter widget in minutes."
+icon: "rocket"
+---
+
+## Prerequisites
+
+Before installing Mix 2.0, ensure you have:
+
+- **Dart SDK**: 3.10.0 or higher (required for the fluent Styler API)
+- **Flutter**: Latest stable version recommended
+
+<Info>
+  Mix 2.0 uses Dart's enhanced method chaining capabilities introduced in Dart 3.10. Ensure your project's `pubspec.yaml` specifies the correct SDK constraint: `sdk: '>=3.10.0 <4.0.0'`
+</Info>
+
+<Steps>
+  <Step title="Install Mix">
+    Install the current 2.0 RC (pre-release):
+
+    ```bash
+    flutter pub add mix --pre-release
+    ```
+
+    Or pin explicitly in `pubspec.yaml`:
+
+    ```yaml
+    dependencies:
+      mix: ^2.0.0-rc.0
+    ```
+
+    Import it where you use it:
+
+    ```dart
+    import 'package:mix/mix.dart';
+    ```
+  </Step>
+
+  <Step title="Create your first Mix widget">
+    ```dart
+    import 'package:flutter/material.dart';
+    import 'package:mix/mix.dart';
+
+    void main() => runApp(const MyApp());
+
+    class MyApp extends StatelessWidget {
+      const MyApp({super.key});
+
+      @override
+      Widget build(BuildContext context) {
+        final cardStyle = BoxStyler()
+            .height(100)
+            .width(240)
+            .color(Colors.blue)
+            .borderRounded(12)
+            .borderAll(color: Colors.black, width: 1, style: BorderStyle.solid);
+
+        return MaterialApp(
+          home: Scaffold(
+            body: Center(
+              child: Box(
+                style: cardStyle,
+                child: StyledText(
+                  'Hello Mix',
+                  style: TextStyler().color(Colors.white).fontSize(18),
+                ),
+              ),
+            ),
+          ),
+        );
+      }
+    }
+    ```
+  </Step>
+
+  <Step title="Reuse the style">
+    Extract it and reuse across widgets:
+
+    ```dart
+    final primaryCard = BoxStyler()
+      .color(Colors.blue)
+      .borderRounded(12);
+
+    final box = Box(style: primaryCard, child: StyledText('Primary'));
+
+    final box2 = Box(
+      style: primaryCard.color(Colors.green),
+      child: StyledText('Success'),
+    );
+    ```
+  </Step>
+</Steps>
+
+## What's next
+
+<CardGroup cols={2}>
+  <Card title="Dynamic styling" icon="wand-magic-sparkles" href="/guides/dynamic-styling">
+    Adapt styles to hover, press, dark mode, and more.
+  </Card>
+  <Card title="Animations" icon="film" href="/guides/animations">
+    Add implicit, phase, and keyframe animations.
+  </Card>
+  <Card title="Design tokens" icon="palette" href="/guides/design-tokens">
+    Centralize colors, spacing, and typography.
+  </Card>
+  <Card title="mix_tailwinds" icon="wind" href="/ecosystem/mix-tailwinds">
+    Tailwind CSS-like utility syntax for Mix.
+  </Card>
+</CardGroup>

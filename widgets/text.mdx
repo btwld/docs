@@ -1,0 +1,91 @@
+---
+title: StyledText
+description: "A styled Text widget with typography, colors, decorations, and text directives."
+icon: "font"
+---
+
+`StyledText` is equivalent to Flutter's `Text` widget, but provides styling capabilities through the Mix framework. It allows you to create visually styled text with typography, colors, decorations, text transformations, and responsive variants.
+
+Use `TextStyler` to create styles with a fluent API:
+
+```dart
+final style = TextStyler()
+ .fontSize(24)
+ .fontWeight(FontWeight.bold)
+ .color(Colors.blue);
+
+StyledText(
+ 'Hello Mix',
+ style: style,
+)
+```
+
+## Constructor
+
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `text` | `String` | Required |
+| `style` | `TextStyler?` | Optional, defaults to `const TextStyler.create()` |
+| `styleSpec` | `StyleSpec<TextSpec>?` | Optional |
+
+## Style API reference
+
+### Text widget methods
+
+| Method | Description |
+|--------|-------------|
+| `overflow` | Sets text overflow behavior |
+| `strutStyle` | Sets strut style |
+| `textAlign` | Sets text alignment |
+| `textScaler` | Sets text scaler |
+| `maxLines` | Sets maximum number of lines |
+| `textWidthBasis` | Sets text width basis |
+| `textHeightBehavior` | Sets text height behavior |
+| `textDirection` | Sets text direction |
+| `softWrap` | Sets soft wrap behavior |
+| `selectionColor` | Sets selection color |
+| `semanticsLabel` | Sets semantics label |
+| `locale` | Sets locale |
+
+### Text directives
+
+| Method | Description |
+|--------|-------------|
+| `uppercase` | Applies uppercase directive |
+| `lowercase` | Applies lowercase directive |
+| `capitalize` | Applies capitalize directive |
+| `titlecase` | Applies title case directive |
+| `sentencecase` | Applies sentence case directive |
+
+### Typography methods
+
+| Method | Description |
+|--------|-------------|
+| `color` | Sets text color |
+| `backgroundColor` | Sets background color |
+| `fontSize` | Sets font size |
+| `fontWeight` | Sets font weight |
+| `fontStyle` | Sets font style |
+| `letterSpacing` | Sets letter spacing |
+| `wordSpacing` | Sets word spacing |
+| `height` | Sets line height |
+| `textBaseline` | Sets text baseline |
+| `decoration` | Sets text decoration |
+| `decorationColor` | Sets decoration color |
+| `decorationStyle` | Sets decoration style |
+| `decorationThickness` | Sets decoration thickness |
+| `fontFamily` | Sets font family |
+| `fontFamilyFallback` | Sets font family fallback |
+| `shadows` | Sets text shadows |
+| `fontFeatures` | Sets font features |
+| `fontVariations` | Sets font variations |
+
+### Widget state variant
+
+| Method | Description |
+|--------|-------------|
+| `onHovered` | Creates a variant for hover state |
+| `onPressed` | Creates a variant for pressed state |
+| `onFocused` | Creates a variant for focused state |
+| `onDisabled` | Creates a variant for disabled state |
+| `onEnabled` | Creates a variant for enabled state |

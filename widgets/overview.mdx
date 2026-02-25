@@ -1,0 +1,110 @@
+---
+title: StyleWidgets
+description: "Overview of Mix's enhanced widgets with built-in styling capabilities."
+icon: "cubes"
+---
+
+Mix extends Flutter's core capabilities by introducing a set of enhanced widgets known as **StyleWidgets**. These widgets seamlessly integrate with Flutter's familiar workflow, but add powerful styling features that make it easier to build composable and expressive UIs.
+
+At the heart of this system, `StyleWidgets` accept a `Style` object as a parameter. This object lets you define a wide range of visual attributes—such as color, padding, margin, and more—in a clear and composable way.
+
+## Prebuilt StyleWidgets
+
+Mix provides a collection of **prebuilt StyleWidgets** designed to cover the most common UI needs. Each comes with its own `style` property, allowing you to apply Mix styles directly and consistently.
+
+### Box
+
+Like Flutter's `Container`, styled with `BoxStyler`. [Learn more](/widgets/box).
+
+```dart
+final style = BoxStyler()
+  .size(100, 100)
+  .color(Colors.blue);
+
+Box(
+  style: style,
+);
+```
+
+### FlexBox, ColumnBox, and RowBox
+
+Equivalent to `Flex`, `Column`, and `Row` wrapped with a Container, styled with `FlexBoxStyler`. [Learn more](/widgets/flexbox).
+
+```dart
+final flexStyle = FlexBoxStyler()
+    .mainAxisAlignment(MainAxisAlignment.spaceBetween)
+    .color(Colors.blue)
+    .direction(Axis.vertical);
+
+FlexBox(
+  style: flexStyle,
+  children: [Text('Item 1'), Text('Item 2'), Text('Item 3')],
+);
+```
+
+### StyledText
+
+Equivalent to Flutter's `Text`, styled with `TextStyler`. [Learn more](/widgets/text).
+
+```dart
+final style = TextStyler()
+  .color(Colors.blue)
+  .fontSize(20);
+
+StyledText(
+  'Hello, World!',
+  style: style,
+)
+```
+
+### StyledIcon
+
+Equivalent to Flutter's `Icon`, styled with `IconStyler`. [Learn more](/widgets/icon).
+
+```dart
+final iconStyle = IconStyler()
+  .color(Colors.blue)
+  .size(30);
+
+StyledIcon(icon: Icons.ac_unit, style: iconStyle);
+```
+
+### StyledImage
+
+Equivalent to Flutter's `Image`, styled with `ImageStyler`. [Learn more](/widgets/image).
+
+```dart
+final imageStyle = ImageStyler()
+  .width(200)
+  .height(150);
+
+StyledImage(
+  image: NetworkImage('https://example.com/image.png'),
+  style: imageStyle,
+);
+```
+
+### Pressable and PressableBox
+
+Equivalent to Flutter's **GestureDetector**, **MouseRegion**, and **Focus** with enhanced interaction state management. [Learn more](/widgets/pressable).
+
+```dart
+Pressable(
+  onPress: () => print('Pressed'),
+  onLongPress: () => print('Long pressed'),
+  onFocusChange: (focused) => print('Focus: $focused'),
+  autofocus: true,
+  child: StyledText('Interactive Button'),
+);
+```
+
+```dart
+PressableBox(
+  style: BoxStyler()
+    .color(Colors.blue)
+    .paddingAll(16)
+    .borderRounded(8),
+  onPress: () => print('PressableBox pressed'),
+  child: StyledText('Styled Button'),
+);
+```

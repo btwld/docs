@@ -1,0 +1,133 @@
+---
+title: Creating context variants
+description: "Apply styles conditionally based on runtime conditions from BuildContext."
+icon: "code-branch"
+---
+
+Context variants allow you to apply styles conditionally based on runtime conditions from the `BuildContext`. This is useful for responding to theme changes, media queries, inherited widgets, or any other context-dependent state.
+
+## Understanding context variants
+
+A `ContextVariant` evaluates a condition at build time using the current `BuildContext`. When the condition is met, the variant's styles are applied to the widget.
+
+## Creating a basic context variant
+
+Create a context variant that responds to a custom `InheritedWidget`:
+
+```dart
+class CustomInheritedWidget extends InheritedWidget {
+  final bool flag;
+
+  const CustomInheritedWidget({
+    super.key,
+    required this.flag,
+    required super.child,
+  });
+
+  static CustomInheritedWidget? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<CustomInheritedWidget>();
+  }
+
+  @override
+  bool updateShouldNotify(covariant CustomInheritedWidget oldWidget) {
+    return flag != oldWidget.flag;
+  }
+}
+```
+
+Now create a `ContextVariant` that checks this inherited widget's state:
+
+```dart
+BoxStyler()
+  .color(Colors.red)
+  .size(100, 100)
+  .variant(
+    ContextVariant('custom_flag', (context) {
+      final flag = CustomInheritedWidget.of(context)?.flag ?? false;
+      return flag;
+    }),
+    BoxStyler().color(Colors.blue),
+  );
+```
+
+In this example:
+- The box is normally red with 100x100 size
+- When `CustomInheritedWidget.flag` is true, the box becomes blue
+- The `ContextVariant` constructor takes a name and a function that evaluates the condition
+
+## Creating reusable variant extensions
+
+For better reusability and a cleaner API, create extension methods on `WidgetStateVariantMixin`:
+
+```dart
+extension WidgetStateVariantMixinX<T extends Style<S>, S extends Spec<S>>
+    on WidgetStateVariantMixin<T, S> {
+  T onCustomFlag(T style) {
+    return variant(
+      ContextVariant('custom_flag', (context) {
+        final flag = CustomInheritedWidget.of(context)?.flag ?? false;
+        return flag;
+      }),
+      style,
+    );
+  }
+}
+```
+
+Now use the extension method for a more readable API:
+
+```dart
+BoxStyler()
+  .color(Colors.red)
+  .size(100, 100)
+  .onCustomFlag(
+    BoxStyler().color(Colors.blue),
+  );
+```
+
+## Complete example
+
+```dart
+import 'package:flutter/material.dart';
+import 'package:mix/mix.dart';
+
+class CustomInheritedWidget extends InheritedWidget {
+  final bool flag;
+
+  const CustomInheritedWidget({
+    super.key,
+    required this.flag,
+    required super.child,
+  });
+
+  static CustomInheritedWidget? of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<CustomInheritedWidget>();
+  }
+
+  @override
+  bool updateShouldNotify(covariant CustomInheritedWidget oldWidget) {
+    return flag != oldWidget.flag;
+  }
+}
+
+class Example extends StatelessWidget {
+  const Example({super.key});
+
+  BoxStyler get box =>
+      BoxStyler()
+          .color(Colors.red)
+          .size(100, 100)
+          .variant(
+            ContextVariant('custom_flag', (context) {
+              final flag = CustomInheritedWidget.of(context)?.flag ?? false;
+              return flag;
+            }),
+            BoxStyler().color(Colors.blue),
+          );
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomInheritedWidget(flag: true, child: box());
+  }
+}
+```

@@ -1,0 +1,90 @@
+---
+title: FlexBox
+description: "A combined Container and Flex widget with box styling and flex layout capabilities."
+icon: "table-columns"
+---
+
+`FlexBox` combines Flutter's `Container` and `Flex` widgets with Mix styling. It provides both box styling (decoration, padding, margins, transforms, constraints) and flex layout capabilities (direction, alignment, spacing) in a single widget.
+
+For specific layouts, use `RowBox` for horizontal layouts or `ColumnBox` for vertical layouts.
+
+Use `FlexBoxStyler` to create styles with a fluent API:
+
+```dart
+final style = FlexBoxStyler()
+ .direction(Axis.horizontal)
+ .mainAxisAlignment(MainAxisAlignment.spaceBetween)
+ .crossAxisAlignment(CrossAxisAlignment.center)
+ .paddingAll(16)
+ .spacing(12)
+ .color(Colors.grey.shade100)
+ .borderRounded(8);
+
+FlexBox(
+ style: style,
+ children: [
+   StyledIcon(icon: Icons.star),
+   StyledText('Rating'),
+   StyledText('4.5'),
+ ],
+)
+```
+
+## Constructor
+
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `FlexBoxStyler?` | Optional, defaults to `const FlexBoxStyler.create()` |
+| `styleSpec` | `StyleSpec<FlexBoxSpec>?` | Optional |
+| `children` | `List<Widget>` | Optional, defaults to `const <Widget>[]` |
+
+## Style API reference
+
+### Flex methods
+
+| Method | Description |
+|--------|-------------|
+| `direction` | Sets flex direction |
+| `mainAxisAlignment` | Sets main axis alignment |
+| `crossAxisAlignment` | Sets cross axis alignment |
+| `mainAxisSize` | Sets main axis size |
+| `verticalDirection` | Sets vertical direction |
+| `textDirection` | Sets text direction |
+| `textBaseline` | Sets text baseline |
+| `spacing` | Sets spacing between children |
+| `row` | Convenience method for horizontal direction |
+| `column` | Convenience method for vertical direction |
+
+### Box methods
+
+| Method | Description |
+|--------|-------------|
+| `animate` | Sets the animation property |
+| `alignment` | Sets the alignment property |
+| `clipBehavior` | Sets the clip behavior |
+| `modifier` | Sets the widget modifier |
+| `foregroundDecoration` | Sets the foreground decoration |
+| `padding` | Sets the padding property |
+| `margin` | Sets the margin property |
+| `transform` | Sets the transform property |
+| `decoration` | Sets the decoration property |
+| `constraints` | Sets the constraints property |
+| `wrap` | Sets the widget modifier (wrap) |
+| `variants` | Sets the variants list |
+
+### Decoration
+
+| Method | Description |
+|--------|-------------|
+| `color` | Sets background color |
+| `gradient` | Sets gradient |
+| `shadow` | Sets single shadow |
+| `shadows` | Sets multiple shadows |
+| `elevation` | Sets elevation shadow |
+| `linearGradient` | Sets a background linear gradient |
+| `radialGradient` | Sets a background radial gradient |
+| `sweepGradient` | Sets a background sweep gradient |
+
+### Border, border radius, constraint, spacing, transform, and variant methods
+
+FlexBox inherits the same border, border radius, constraint, spacing, transform, and variant methods as [Box](/widgets/box). Refer to the Box documentation for the complete list.

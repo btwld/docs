@@ -1,0 +1,156 @@
+---
+title: Box
+description: "A styled Container widget with decoration, padding, margins, transforms, and constraints."
+icon: "square"
+---
+
+`Box` is equivalent to Flutter's `Container`, providing styling capabilities through the Mix framework. It can be used to create visually styled boxes with decoration, padding, margins, transforms, and constraints.
+
+Use `BoxStyler` to create styles with a fluent API:
+
+```dart
+final style = BoxStyler()
+ .width(200)
+ .height(100)
+ .color(Colors.blue)
+ .borderRounded(12)
+ .paddingAll(16);
+
+Box(style: style, child: Text('Hello Mix'))
+```
+
+## Constructor
+
+| Prop | Type | Required / Default Value |
+|------|------|--------------------------|
+| `style` | `BoxStyler?` | Optional, defaults to `const BoxStyler.create()` |
+| `styleSpec` | `StyleSpec<BoxSpec>?` | Optional (resolved style spec) |
+| `child` | `Widget?` | Optional |
+
+## Style API reference
+
+### Box methods
+
+| Method | Description |
+|--------|-------------|
+| `clipBehavior` | Sets the clip behavior |
+| `alignment` | Sets the alignment |
+| `modifier` | Sets the widget modifier |
+| `foregroundDecoration` | Sets the foreground decoration |
+| `transform` | Sets the transform and optionally the alignment |
+| `constraints` | Sets the box constraints |
+| `padding` | Sets the padding |
+| `margin` | Sets the margin |
+| `decoration` | Sets the decoration |
+| `animate` | Sets the animation configuration |
+| `wrap` | Wraps with a widget modifier |
+| `borderRadius` | Sets the border radius |
+| `border` | Sets the border decoration |
+| `variants` | Sets the style variants |
+
+### Animation
+
+| Method | Description |
+|--------|-------------|
+| `keyframeAnimation` | Creates a keyframe animation |
+| `phaseAnimation` | Creates a phase animation |
+
+### Border radius
+
+| Method | Description |
+|--------|-------------|
+| `borderRadiusAll` | Sets border radius for all corners |
+| `borderRadiusTop` | Sets border radius for the top corners |
+| `borderRadiusBottom` | Sets border radius for the bottom corners |
+| `borderRadiusLeft` | Sets border radius for the left corners |
+| `borderRadiusRight` | Sets border radius for the right corners |
+| `borderRounded` | Sets a uniform circular radius for all corners |
+| `borderRoundedTop` | Sets a circular radius for the top corners |
+| `borderRoundedBottom` | Sets a circular radius for the bottom corners |
+| `borderRoundedLeft` | Sets a circular radius for the left corners |
+| `borderRoundedRight` | Sets a circular radius for the right corners |
+
+### Border
+
+| Method | Description |
+|--------|-------------|
+| `borderTop` | Sets the top border |
+| `borderBottom` | Sets the bottom border |
+| `borderLeft` | Sets the left border |
+| `borderRight` | Sets the right border |
+| `borderStart` | Sets the start border (RTL-aware) |
+| `borderEnd` | Sets the end border (RTL-aware) |
+| `borderVertical` | Sets vertical borders (top & bottom) |
+| `borderHorizontal` | Sets horizontal borders (left & right) |
+| `borderAll` | Sets all borders |
+
+### Constraint
+
+| Method | Description |
+|--------|-------------|
+| `width` | Sets both min and max width to create a fixed width |
+| `height` | Sets both min and max height to create a fixed height |
+| `minWidth` | Sets minimum width constraint |
+| `maxWidth` | Sets maximum width constraint |
+| `minHeight` | Sets minimum height constraint |
+| `maxHeight` | Sets maximum height constraint |
+| `size` | Sets both width and height to specific values |
+
+### Decoration
+
+| Method | Description |
+|--------|-------------|
+| `color` | Sets background color |
+| `gradient` | Sets gradient |
+| `shadow` | Sets single shadow |
+| `shadows` | Sets multiple shadows |
+| `elevation` | Sets elevation shadow |
+| `image` | Sets image decoration |
+| `shape` | Sets box shape |
+| `shapeCircle` | Sets a circular shape |
+| `shapeStadium` | Sets a stadium shape |
+| `linearGradient` | Sets a background linear gradient |
+| `radialGradient` | Sets a background radial gradient |
+| `sweepGradient` | Sets a background sweep gradient |
+| `backgroundImage` | Sets a background image from an ImageProvider |
+| `backgroundImageUrl` | Sets a background image from a network URL |
+| `backgroundImageAsset` | Sets a background image from an asset path |
+
+### Spacing
+
+| Method | Description |
+|--------|-------------|
+| `paddingTop` | Sets the top padding |
+| `paddingBottom` | Sets the bottom padding |
+| `paddingLeft` | Sets the left padding |
+| `paddingRight` | Sets the right padding |
+| `paddingX` | Sets horizontal padding |
+| `paddingY` | Sets vertical padding |
+| `paddingAll` | Sets padding on all sides |
+| `marginTop` | Sets the top margin |
+| `marginBottom` | Sets the bottom margin |
+| `marginLeft` | Sets the left margin |
+| `marginRight` | Sets the right margin |
+| `marginX` | Sets horizontal margin |
+| `marginY` | Sets vertical margin |
+| `marginAll` | Sets margin on all sides |
+
+### Transform
+
+| Method | Description |
+|--------|-------------|
+| `rotate` | Sets rotation transform |
+| `scale` | Sets scale transform |
+| `translate` | Sets translation transform |
+| `skew` | Sets skew transform |
+| `transformReset` | Resets transform to identity |
+
+### Widget state variant
+
+| Method | Description |
+|--------|-------------|
+| `onHovered` | Creates a variant for hover state |
+| `onPressed` | Creates a variant for pressed state |
+| `onFocused` | Creates a variant for focused state |
+| `onDisabled` | Creates a variant for disabled state |
+| `onEnabled` | Creates a variant for enabled state |
